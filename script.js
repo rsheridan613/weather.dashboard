@@ -1,7 +1,7 @@
 var userInput = document.getElementById("user-input");
 var userForm = document.getElementById("form-submit");
 var searchedCities = [];
-var today = document.getElementById("today");
+var cityName = document.getElementById("city-name");
 
 var weatherAPI = "https://api.openweathermap.org/data/2.5/forecast?";
 var geocoderAPI = "http://api.openweathermap.org/geo/1.0/direct?q=";
@@ -45,10 +45,28 @@ function getWeather(lat, lon) {
 // Take weather data and set to page
 function setPage(weather) {
   var city = weather.city.name;
-  var temp = weather.list[0].main.temp;
-  var wind = weather.list[0].wind.speed;
-  var humidity = weather.list[0].main.humidity;
-  console.log(city, temp, wind, humidity);
+  var weatherData = weather.list;
+  var currentWeather = weatherData[0].weather[0].main;
+
+  if (currentWeather === "Clouds") {
+    weatherIcon = "☁️";
+  } else if (currentWeather === "Clear") {
+    weatherIcon = "☀️";
+  } else if (currentWeather === "Snow") {
+    weatherIcon = "❄️";
+  } else if (currentWeather === "Rain") {
+    weatherIcon = "🌧️";
+  }
+
+  var temp = weatherData[0].main.temp;
+  var wind = weatherData[0].wind.speed;
+  var humidity = weatherData[0].main.humidity;
+
+  document.getElementById("city-name").textContent = city + " " + weatherIcon;
 }
+
 // Event Listeners
 userForm.addEventListener("submit", handleFormSubmit);
+
+//Weather types from API
+// Clouds/04d ☁️, Clear/01d ☀️, Snow/13d ❄️, Rain/10n 🌧️
