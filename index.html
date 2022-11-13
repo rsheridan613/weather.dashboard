@@ -14,7 +14,7 @@
     <title>Weather Dashboard</title>
   </head>
   <body>
-    <header class="container-fluid text-white text-center bg-dark p-3">
+    <header class="container-fluid text-white text-center bg-dark p-3 mb-3">
       <h1>Weather Dashboard</h1>
     </header>
     <main class="container-fluid">
@@ -30,42 +30,39 @@
                 aria-describedby="userInput"
               />
             </div>
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary border-bottom">
+              Search
+            </button>
           </form>
         </aside>
         <section class="col-lg-10">
-          <div id="today">
+          <div id="today" class="border border-dark">
             <ul id="weather-data">
               <h2 id="city-name"></h2>
             </ul>
           </div>
           <h2>5-Day Forecast</h2>
           <div class="row">
-            <ul class="col-lg-2" id="next-day-1">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-              praesentium beatae laboriosam. Voluptas quo provident ut! Quasi
-              ducimus eveniet voluptates?
-            </ul>
-            <ul class="col-lg-2" id="next-day-2">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Distinctio quidem deserunt quas magni nemo commodi. Ea maiores
-              quod nobis aspernatur!
-            </ul>
-            <ul class="col-lg-2" id="next-day-3">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur
-              ratione consectetur expedita explicabo obcaecati repudiandae sed
-              delectus. Atque, distinctio eaque.
-            </ul>
-            <ul class="col-lg-2" id="next-day-4">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga
-              alias praesentium nostrum deleniti, illo natus magnam molestias.
-              Temporibus, placeat odio?
-            </ul>
-            <ul class="col-lg-2" id="next-day-5">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Est esse,
-              deserunt reiciendis similique illo blanditiis veritatis. Animi
-              voluptas minima eaque!
-            </ul>
+            <ul
+              class="col-lg-2 text-white bg-dark m-3 next-day"
+              id="next-day-1"
+            ></ul>
+            <ul
+              class="col-lg-2 text-white bg-dark m-3 next-day"
+              id="next-day-2"
+            ></ul>
+            <ul
+              class="col-lg-2 text-white bg-dark m-3 next-day"
+              id="next-day-3"
+            ></ul>
+            <ul
+              class="col-lg-2 text-white bg-dark m-3 next-day"
+              id="next-day-4"
+            ></ul>
+            <ul
+              class="col-lg-2 text-white bg-dark m-3 next-day"
+              id="next-day-5"
+            ></ul>
           </div>
         </section>
       </div>
