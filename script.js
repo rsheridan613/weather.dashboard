@@ -39,30 +39,46 @@ function getWeather(lat, lon) {
     })
     .then(function (data) {
       console.log(data);
-      return setPage(data);
+      return getData(data);
     });
 }
-// Take weather data and set to page
-function setPage(weather) {
+// Take weather data
+function getData(weather) {
+  // Find weather
   var city = weather.city.name;
-  var weatherData = weather.list;
-  var currentWeather = weatherData[0].weather[0].main;
-
+  var date = weather.list[0].dt_txt;
+  var currentWeather = weather.list[0].weather[0].main;
+  var temp = weather.list[0].main.temp;
+  var wind = weather.list[0].wind.speed;
+  var humidity = weather.list[0].main.humidity;
+  // Change weather to an icon
   if (currentWeather === "Clouds") {
-    weatherIcon = "☁️";
+    var weatherIcon = "☁️";
   } else if (currentWeather === "Clear") {
-    weatherIcon = "☀️";
+    var weatherIcon = "☀️";
   } else if (currentWeather === "Snow") {
-    weatherIcon = "❄️";
+    var weatherIcon = "❄️";
   } else if (currentWeather === "Rain") {
-    weatherIcon = "🌧️";
+    var weatherIcon = "🌧️";
   }
+  // Send data for today's element
+  makeToday(city, date, weatherIcon, temp, wind, humidity);
+}
 
-  var temp = weatherData[0].main.temp;
-  var wind = weatherData[0].wind.speed;
-  var humidity = weatherData[0].main.humidity;
-
-  document.getElementById("city-name").textContent = city + " " + weatherIcon;
+// Append to main block
+function makeToday(city, date, weatherIcon, temp, wind, humidity) {
+  var today = new Date();
+  var todayTemp = document.createElement("h4");
+  var todayWind = document.createElement("h4");
+  var todayHumidity = document.createElement("h4");
+  document.getElementById("city-name").textContent =
+    city + " " + weatherIcon + " " + today;
+  todayTemp.textContent = "Temp: " + temp + "°F";
+  todayWind.textContent = "Wind: " + wind + "mph";
+  todayHumidity.textContent = "Humidity: " + humidity + "%";
+  document
+    .getElementById("weather-data")
+    .append(todayTemp, todayWind, todayHumidity);
 }
 
 // Event Listeners
