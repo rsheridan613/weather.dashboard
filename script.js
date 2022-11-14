@@ -3,6 +3,7 @@
 var userInput = document.getElementById("user-input");
 var userForm = document.getElementById("form-submit");
 var cityName = document.getElementById("city-name");
+var dayForecasts = document.getElementsByClassName("next-day");
 // API shortcuts
 var weatherAPI = "https://api.openweathermap.org/data/2.5/forecast?";
 var geocoderAPI = "http://api.openweathermap.org/geo/1.0/direct?q=";
@@ -24,11 +25,11 @@ var nextDays = [];
 // On city search
 function handleFormSubmit(e) {
   e.preventDefault();
-  todayTemp.textContent = "";
-  todayWind.textContent = "";
-  todayHumidity.textContent = "";
-  var input = userInput.value;
+  input = userInput.value;
+  userForm.reset();
+  // Send values
   getCoords(input);
+  saveInput(input);
 }
 
 // Get coordinates for weather API
@@ -54,7 +55,7 @@ function getWeather(lat, lon) {
       return responce.json();
     })
     .then(function (data) {
-      console.log(data);
+      // console.log(data);
       return getData(data);
     });
 }
@@ -85,6 +86,7 @@ function getData(weather) {
       nextDays.push(weather.list[i]);
     }
   }
+  // Send data to sort for next day's elements
   sortForecast(nextDays);
 }
 
@@ -266,8 +268,24 @@ function makeDay5(nextDayIcon, nextDayTemp, nextDayWind, nextDayHumidity) {
     .append(day5Date, day5Weather, day5Temp, day5Wind, day5Humidity);
 }
 
-// Event Listeners
-userForm.addEventListener("submit", handleFormSubmit);
+// Save input to local storage
+function saveInput(input) {
+  var save = JSON.parse(localStorage.getItem("saved")) || [];
+  var button = "btn";
+  var city = input;
+  save.push({ button, city });
+  localStorage.setItem("saved", JSON.stringify(save));
+  makeButton(save);
+  console.log(save);
+}
 
-//Weather types from API
-// Clouds/04d ☁️, Clear/01d ☀️, Snow/13d ❄️, Rain/10n 🌧️
+// Makes button from local storage
+function makeButton(input) {
+  var buttonEl = document.createElement("button");
+  buttonEl.classList.add("btn", "btn-secondary", "m-1");
+  buttonEl.textContent = input;
+  userForm.append(buttonEl);
+}
+
+// Event Listener
+userForm.addEventListener("submit", handleFormSubmit);
