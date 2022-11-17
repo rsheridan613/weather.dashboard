@@ -5,8 +5,8 @@ var userForm = document.getElementById("form-submit");
 var cityName = document.getElementById("city-name");
 var dayForecasts = document.getElementsByClassName("next-day");
 // API shortcuts
-var weatherAPI = "https://api.openweathermap.org/data/2.5/forecast?";
-var geocoderAPI = "https://api.openweathermap.org/geo/1.0/direct?q=";
+var weatherAPI = "http://api.openweathermap.org/data/2.5/forecast?";
+var geocoderAPI = "http://api.openweathermap.org/geo/1.0/direct?q=";
 var APIkey = "appid=272572527f0f24c6a9098fc55c892b6c";
 // DOM shortcuts
 var todayTemp = document.createElement("h4");
